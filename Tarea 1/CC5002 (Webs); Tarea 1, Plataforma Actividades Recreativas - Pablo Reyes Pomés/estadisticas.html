@@ -1,0 +1,45 @@
+<!-- estadisticas.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Estadísticas</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="estadisticas.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Estadísticas de Actividades Recreativas</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="agregar.html">Agregar Actividad</a></li>
+      <li><a href="actividades.html">Ver Listado de Actividades</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Gráficos de Actividades</h2>
+
+    <!-- Gráfico 1: Cantidad de actividades por día -->
+    <canvas id="grafico-actividades-dia"></canvas>
+    <br>
+
+    <!-- Gráfico 2: Cantidad de actividades por tipo -->
+    <canvas id="grafico-tipo-actividad"></canvas>
+    <br>
+
+    <!-- Gráfico 3: Actividades por mes (mañana, mediodía, tarde) -->
+    <canvas id="grafico-actividades-mes"></canvas>
+  </main>
+
+  <!-- Botón "Volver a la portada" -->
+  <footer>
+    <button onclick="window.location.href='index.html'">Volver a la portada</button>
+  </footer>
+</body>
+</html>
