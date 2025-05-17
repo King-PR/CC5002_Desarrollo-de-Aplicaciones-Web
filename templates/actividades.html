@@ -1,0 +1,126 @@
+<!-- templates/actividades.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Listado de Actividades</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='listado.js') }}" defer></script>
+  <style>
+    .detalle {
+      display: none;
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+
+    .foto-mini {
+      width: auto;
+      height: 240px;
+      max-width: 320px;
+      cursor: pointer;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .overlay img {
+      width: auto;
+      height: 600px;
+      max-width: 800px;
+    }
+
+    .overlay button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 15px;
+    }
+
+    /* Estilos para mensajes flash */
+    .flashes {
+      background-color: #fffae6;
+      border: 1px solid #ffe58f;
+      padding: 10px;
+      margin: 15px auto;
+      max-width: 800px;
+      border-radius: 5px;
+      color: #8a6d00;
+      font-weight: bold;
+      list-style: none;
+    }
+
+    .flashes li {
+      margin: 0;
+    }
+
+    /* Clase para encabezado oculto */
+    .visually-hidden {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Listado de Actividades</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('agregar_actividad') }}">Agregar Actividad</a></li>
+      <li><a href="{{ url_for('ver_estadisticas') }}">Estadísticas</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for msg in messages %}
+            {% if msg %}
+              <li>{{ msg }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <table id="tabla-actividades">
+      <thead>
+        <tr>
+          <th>Inicio</th>
+          <th>Término</th>
+          <th>Comuna</th>
+          <th>Sector</th>
+          <th>Tema</th>
+          <th>Organizador</th>
+          <th>Fotos</th>
+        </tr>
+      </thead>
+      <tbody id="cuerpo-tabla">
+      </tbody>
+    </table>
+
+    <section id="detalle-actividad" class="detalle">
+      <h2 class="visually-hidden">Detalle de la actividad</h2>
+    </section>
+  </main>
+</body>
+</html>
+

@@ -1,0 +1,88 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Actividades Recreativas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>¡Bienvenid@ a la Plataforma de Actividades Recreativas de Chile!</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('agregar_actividad') }}">Agregar Actividad</a></li>
+      <li><a href="{{ url_for('ver_actividades') }}">Ver Listado de Actividades</a></li>
+      <li><a href="{{ url_for('ver_estadisticas') }}">Estadísticas</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Últimas 5 Actividades Agregadas</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for msg in messages %}
+            <li>{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <table>
+      <thead>
+        <tr>
+          <th>Inicio</th>
+          <th>Término</th>
+          <th>Comuna</th>
+          <th>Sector</th>
+          <th>Tema</th>
+          <th>Foto</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for actividad in actividades %}
+          <tr>
+            <td>{{ actividad.dia_hora_inicio.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>
+              {{ actividad.dia_hora_termino.strftime('%Y-%m-%d %H:%M') if actividad.dia_hora_termino else '-' }}
+            </td>
+            <td>{{ actividad.comuna.nombre }}</td>
+            <td>{{ actividad.sector }}</td>
+            <td>
+              {% if actividad.temas %}
+                {% for tema in actividad.temas %}
+                  {% if tema.tema.lower() == 'otro' %}
+                    {{ tema.glosa_otro or 'Otro' }}{% if not loop.last %}, {% endif %}
+                  {% else %}
+                    {{ tema.tema|capitalize }}{% if not loop.last %}, {% endif %}
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                Otro
+              {% endif %}
+            </td>
+            <td>
+              {% if actividad.fotos %}
+                <img src="{{ url_for('static', filename='uploads/' + actividad.fotos[0].nombre_archivo) }}"
+                     alt="Foto"
+                     style="width: 100px; height: auto;">
+              {% else %}
+                —
+              {% endif %}
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="6">No hay actividades registradas aún.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
