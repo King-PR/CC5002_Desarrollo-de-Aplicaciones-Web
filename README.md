@@ -161,6 +161,15 @@ flask run
 
 ---
 
+## Intrucciones (alt.) para ejecutar aplicación:
+1. Abrir carpeta root en terminal.
+2. En terminal, ejecutar virtual environment con:  .\venv\Scripts\Activate.ps1
+3. Ejecutar comando: python app.py
+4. En un navegador como Google Chrome, escribir la dirección: http://localhost:5000/
+5. Probar la aplicación.
+
+---
+
 ## Créditos
 
 - **Profesor:** José Urzúa
