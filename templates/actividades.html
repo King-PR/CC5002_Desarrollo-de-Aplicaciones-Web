@@ -1,0 +1,123 @@
+<!-- templates/actividades.html -->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Listado de Actividades</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='listado.js') }}" defer></script>
+  <style>
+    /*
+     * Estilos CSS específicos para la página de listado de actividades.
+     * Estos estilos complementan o sobrescriben los definidos en 'style.css'.
+     */
+
+    /* Estilo para el contenedor de detalles de actividad, inicialmente oculto. */
+    .detalle {
+      display: none;
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+      /* Sombra y bordes redondeados para una apariencia consistente. */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    /* Estilos para los mensajes flash (mensajes temporales al usuario). */
+    .flashes {
+      background-color: #fffae6;
+      border: 1px solid #ffe58f;
+      padding: 10px;
+      margin: 15px auto;
+      max-width: 800px;
+      border-radius: 5px;
+      color: #8a6d00;
+      font-weight: bold;
+      list-style: none; /* Remueve los puntos de lista predeterminados. */
+    }
+
+    .flashes li {
+      margin: 0;
+    }
+
+    /* Clase para ocultar elementos visualmente, útil para accesibilidad (ej. encabezados solo para lectores de pantalla). */
+    .visually-hidden {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Listado de Actividades</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('agregar_actividad') }}">Agregar Actividad</a></li>
+      <li><a href="{{ url_for('ver_estadisticas') }}">Estadísticas</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for msg in messages %}
+            {% if msg %}
+              <li>{{ msg }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <table id="tabla-actividades">
+      <thead>
+        <tr>
+          <th>Inicio</th>
+          <th>Término</th>
+          <th>Comuna</th>
+          <th>Sector</th>
+          <th>Tema</th>
+          <th>Organizador</th>
+          <th>Fotos</th>
+        </tr>
+      </thead>
+      <tbody id="cuerpo-tabla">
+        </tbody>
+    </table>
+
+    <div id="paginacion" style="text-align: center;"></div>
+
+    <section id="detalle-actividad" class="detalle">
+      <h2 class="visually-hidden">Detalle de la actividad</h2>
+      </section>
+  </main>
+
+  <div id="modal-editar-comentario" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="cerrarModalEditarComentario()">&times;</span>
+      <h3>Editar Comentario</h3>
+      <div id="editar-comentario-errores" style="color:red;"></div>
+      <label for="editar-comentario-nombre">Tu nombre:</label>
+      <input type="text" id="editar-comentario-nombre" maxlength="80"><br>
+      <label for="editar-comentario-texto">Tu comentario:</label>
+      <textarea id="editar-comentario-texto" rows="5" cols="50" maxlength="300"></textarea><br>
+      <button onclick="submitEditarComentario()">Guardar Cambios</button>
+      <button onclick="cerrarModalEditarComentario()">Cancelar</button>
+    </div>
+  </div>
+
+  <div id="modal-backdrop" class="modal-backdrop" onclick="cerrarModalEditarComentario()"></div>
+
+</body>
+</html>

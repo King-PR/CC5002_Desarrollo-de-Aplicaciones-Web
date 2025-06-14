@@ -1,0 +1,81 @@
+<!-- templates/estadisticas.html -->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Estadísticas</title>
+  <!-- Enlaza la hoja de estilos principal de la aplicación para una apariencia consistente. -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Carga la biblioteca Chart.js para la creación de gráficos dinámicos. -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Carga el script JavaScript específico para la lógica y renderizado de las estadísticas.
+       Se utiliza 'defer' para asegurar que el HTML se cargue completamente antes de ejecutar el script. -->
+  <script src="{{ url_for('static', filename='estadisticas.js') }}" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Estadísticas de Actividades Recreativas</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('agregar_actividad') }}">Agregar Actividad</a></li>
+      <li><a href="{{ url_for('ver_actividades') }}">Ver Listado de Actividades</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Gráficos de Actividades</h2>
+
+    <!-- Controles para el Gráfico 1: Cantidad de actividades por día -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      <label for="selector-mes-dia">Selecciona una opción para el gráfico mensual:</label>
+      <select id="selector-mes-dia" class="chart-selector">
+        <option value="0">Enero</option>
+        <option value="1">Febrero</option>
+        <option value="2">Marzo</option>
+        <option value="3" selected>Abril</option> <!-- Mes de abril seleccionado por defecto. -->
+        <option value="4">Mayo</option>
+        <option value="5">Junio</option>
+        <option value="6">Julio</option>
+        <option value="7">Agosto</option>
+        <option value="8">Septiembre</option>
+        <option value="9">Octubre</option>
+        <option value="10">Noviembre</option>
+        <option value="11">Diciembre</option>
+      </select>
+    </div>
+    <h3 style="text-align: center;">Cantidad de Actividades por Día del Mes</h3>
+    <!-- Lienzo donde se renderizará el gráfico de actividades por día. -->
+    <canvas id="grafico-actividades-dia"></canvas>
+    <br>
+
+    <!-- Gráfico 2: Cantidad de actividades por tipo -->
+    <h3 style="text-align: center;">Distribución de Actividades por Tema</h3>
+    <!-- Lienzo donde se renderizará el gráfico de distribución por tema. -->
+    <canvas id="grafico-tipo-actividad"></canvas>
+    <br>
+
+    <!-- Gráfico 3: Actividades por mes (mañana, mediodía, tarde) -->
+    <h3 style="text-align: center;">Actividades por Franja Horaria</h3>
+    <!-- Lienzo donde se renderizará el gráfico de actividades por franja horaria. -->
+    <canvas id="grafico-actividades-mes"></canvas>
+  </main>
+
+  <footer>
+    <!-- Botón para regresar a la página principal de la aplicación. -->
+    <button id="volver-portada" class="btn-unificado">Volver a la portada</button>
+  </footer>
+
+  <script>
+    // Agrega un escuchador de eventos al botón "Volver a la portada".
+    document.getElementById("volver-portada").addEventListener("click", function () {
+      // Redirige al usuario a la URL de la página de inicio.
+      window.location.href = "{{ url_for('index') }}";
+    });
+  </script>
+</body>
+</html>
