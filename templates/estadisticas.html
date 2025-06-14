@@ -1,13 +1,13 @@
-<!-- estadisticas.html -->
+<!-- templates/estadisticas.html -->
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Estadísticas</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="estadisticas.js"></script>
+  <script src="{{ url_for('static', filename='estadisticas.js') }}"></script>
 </head>
 <body>
   <header>
@@ -16,9 +16,9 @@
 
   <nav>
     <ul>
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="agregar.html">Agregar Actividad</a></li>
-      <li><a href="actividades.html">Ver Listado de Actividades</a></li>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('agregar_actividad') }}">Agregar Actividad</a></li>
+      <li><a href="{{ url_for('ver_actividades') }}">Ver Listado de Actividades</a></li>
     </ul>
   </nav>
 
@@ -37,9 +37,14 @@
     <canvas id="grafico-actividades-mes"></canvas>
   </main>
 
-  <!-- Botón "Volver a la portada" -->
   <footer>
-    <button onclick="window.location.href='index.html'">Volver a la portada</button>
+    <button id="volver-portada">Volver a la portada</button>
   </footer>
+
+  <script>
+    document.getElementById("volver-portada").addEventListener("click", function () {
+      window.location.href = "{{ url_for('index') }}";
+    });
+  </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-/* style.css */
+/* static/style.css */
 
 /* Estilos generales */
 body {
@@ -95,5 +95,48 @@ canvas {
   max-height: 800px;
   display: block; 
 }
+
+/* Paginación para listado de actividades */
+#paginacion {
+  margin-top: 20px;
+}
+
+#paginacion button {
+  margin: 5px;
+  padding: 8px 14px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#paginacion button:hover {
+  background-color: #005fa3;
+}
+
+#paginacion span {
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+/* Mensajes flash */
+.flashes {
+  background-color: #ffeeba; /* amarillo suave */
+  border: 1px solid #ffc107;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  list-style-type: none;
+}
+
+.flashes li {
+  color: #856404;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 
   
