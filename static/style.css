@@ -1,0 +1,575 @@
+/* static/style.css */
+
+
+/* --- Estilos Generales --- */
+/*
+ * Define los estilos básicos para el cuerpo del documento, fuente, márgenes,
+ * color de fondo y color de texto.
+ */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/*
+ * Estilos para el encabezado de la página.
+ */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/*
+ * Estilos para la lista de navegación principal.
+ * Utiliza flexbox para alinear los elementos horizontalmente.
+ */
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+}
+
+/*
+ * Estilos para los enlaces de navegación.
+ */
+nav a {
+  text-decoration: none;
+  color: #0077cc;
+  font-weight: bold;
+}
+
+/*
+ * Estilos para los enlaces de navegación al pasar el mouse por encima.
+ */
+nav a:hover {
+  color: #005a99;
+}
+
+/*
+ * Estilos para los títulos principales de las secciones.
+ */
+main h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* --- Tabla de Actividades --- */
+/*
+ * Estilos generales para las tablas.
+ * Incluye ancho, colapso de bordes, centrado, fondo, sombra y bordes redondeados.
+ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden; /* Asegura que los bordes redondeados se muestren correctamente con el contenido. */
+}
+
+/*
+ * Estilos para las celdas de encabezado y datos de la tabla.
+ */
+th, td {
+  padding: 12px; /* Mayor espaciado interno para mejor visualización. */
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+/*
+ * Estilos específicos para las celdas de encabezado de la tabla.
+ */
+th {
+  background-color: #0077cc;
+  color: white;
+  font-weight: bold; /* Asegura que el texto sea claro y legible. */
+}
+
+/*
+ * Estilos para las filas del cuerpo de la tabla al pasar el mouse por encima.
+ */
+tbody tr:hover {
+  background-color: #e0f2f7; /* Color de fondo al pasar el mouse. */
+  cursor: pointer;
+}
+
+/* --- Imágenes --- */
+/*
+ * Estilos generales para todas las imágenes.
+ */
+img {
+  border-radius: 5px;
+  max-height: 80px;
+}
+
+/*
+ * Estilos para las imágenes en miniatura que se muestran en el detalle de la actividad.
+ */
+.foto-mini {
+  max-width: 320px;
+  max-height: 240px;
+  cursor: pointer;
+}
+
+/*
+ * Estilos para el overlay que aparece al hacer clic en una imagen para verla en grande.
+ */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px); /* Efecto de desenfoque para el fondo. */
+}
+
+/*
+ * Estilos para la imagen dentro del overlay.
+ */
+.overlay img {
+  max-width: 90%; /* Más adaptable a diferentes tamaños de pantalla. */
+  max-height: 90%; /* Más adaptable a diferentes tamaños de pantalla. */
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/*
+ * Estilos para el botón de cerrar dentro del overlay.
+ */
+.overlay button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #dc3545; /* Botón de cierre rojo. */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/*
+ * Estilos para el botón de cerrar del overlay al pasar el mouse por encima.
+ */
+.overlay button:hover {
+  background-color: #c82333;
+}
+
+/* --- Gráficos (Estadísticas) --- */
+/*
+ * Estilos para los elementos canvas utilizados en los gráficos de estadísticas.
+ */
+canvas {
+  max-width: 100%;
+  height: 400px; /* Altura fija para los gráficos. */
+  margin: 20px auto;
+  display: block;
+  background-color: white; /* Fondo blanco para los gráficos. */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Paginación --- */
+/*
+ * Estilos para los botones de paginación.
+ */
+#paginacion button {
+  margin: 5px;
+  padding: 10px 16px; /* Ajuste del espaciado interno. */
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em; /* Ajuste del tamaño de fuente. */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+}
+
+/*
+ * Estilos para los botones de paginación al pasar el mouse por encima.
+ */
+#paginacion button:hover {
+  background-color: #005fa3;
+  transform: translateY(-2px); /* Efecto de elevación al pasar el mouse. */
+}
+
+/*
+ * Estilos para el texto que muestra la página actual y el total de páginas.
+ */
+#paginacion span {
+  margin: 0 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* --- Mensajes Flash --- */
+/*
+ * Estilos para los mensajes flash (notificaciones temporales).
+ */
+.flashes {
+  background-color: #ffeeba; /* Tono amarillo suave. */
+  border: 1px solid #ffc107;
+  padding: 15px 25px; /* Mayor espaciado interno. */
+  margin: 20px auto; /* Mayor margen. */
+  border-radius: 8px; /* Bordes más redondeados. */
+  list-style-type: none;
+  max-width: 800px;
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total. */
+}
+
+/*
+ * Estilos para los elementos de lista dentro de los mensajes flash.
+ */
+.flashes li {
+  color: #856404;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* --- Estilos de Comentarios y Modales --- */
+
+/*
+ * Contenedor de cada comentario individual.
+ */
+.comentario-item {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/*
+ * Estilos para los párrafos dentro de los comentarios.
+ */
+.comentario-item p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+/*
+ * Estilos para el texto en negrita dentro de los comentarios (ej. nombre del autor).
+ */
+.comentario-item strong {
+  color: #0077cc;
+}
+
+/* Estilo para todos los botones con la clase btn-unificado */
+.btn-unificado {
+  padding: 8px 16px;
+  background-color: #0076cd; 
+  color: white; 
+  border: none; 
+  border-radius: 6px; 
+  font-size: 1em; 
+  cursor: pointer; /* Cursor en forma de mano */
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease; /* Efecto al pasar el mouse */
+}
+
+/* Efecto al pasar el mouse por encima */
+.btn-unificado:hover {
+  background-color: #005fa3;
+  transform: translateY(-2px); /* Efecto de elevación */
+}
+
+/* Efecto al hacer clic en el botón */
+.btn-unificado:active {
+  transform: translateY(0); /* Vuelve al estado normal */
+}
+
+
+/*
+ * Estilos para los botones de acción dentro de los comentarios (Editar/Eliminar).
+ */
+.comentario-acciones button {
+  background-color: #e0e0e0; /* Color gris por defecto. */
+  color: #333;
+  border: 1px solid #ccc;
+  transition: all 0.2s ease-in-out; /* Transición de color para efectos específicos. */
+}
+
+/*
+ * Estilos generales al pasar el mouse por encima de los botones de acción de comentarios.
+ */
+.comentario-acciones button:hover {
+  color: white; /* Texto blanco al pasar el mouse. */
+}
+
+/*
+ * Estilos para el botón "Editar" al pasar el mouse por encima.
+ */
+.comentario-acciones button:first-child:hover {
+  background-color: #005fa3; /* Azul. */
+  border-color: #005fa3;
+}
+
+/*
+ * Estilos para el botón "Eliminar" al pasar el mouse por encima.
+ */
+.comentario-acciones button:last-child:hover {
+  background-color: #dc3545; /* Rojo. */
+  border-color: #dc3545;
+}
+
+/*
+ * Estilos para el contenedor del modal (ventana emergente).
+ */
+.modal {
+  display: none; /* Oculto por defecto. */
+  position: fixed; /* Permanece en su lugar al hacer scroll. */
+  z-index: 1001; /* Se superpone a otros elementos. */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding-top: 60px;
+}
+
+/*
+ * Estilos para el contenido dentro del modal.
+ */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 30px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: fadeIn 0.3s ease-out; /* Animación de aparición. */
+}
+
+/*
+ * Definición de la animación fadeIn para el contenido del modal.
+ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/*
+ * Estilos para el botón de cerrar dentro del modal.
+ */
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 25px;
+}
+
+/*
+ * Estilos para el botón de cerrar del modal al pasar el mouse por encima o enfocarlo.
+ */
+.close-button:hover,
+.close-button:focus {
+  color: #333;
+  text-decoration: none;
+}
+
+/*
+ * Estilos para el fondo oscuro detrás del modal.
+ */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  animation: backdropFadeIn 0.3s ease-out; /* Animación de aparición del fondo. */
+}
+
+/*
+ * Definición de la animación backdropFadeIn para el fondo del modal.
+ */
+@keyframes backdropFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/*
+ * Mejoras de espaciado y estilo para los elementos de formulario dentro del modal.
+ */
+.modal-content label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+/*
+ * Estilos para campos de texto y áreas de texto dentro del modal.
+ */
+.modal-content input[type="text"],
+.modal-content textarea {
+  width: calc(100% - 24px);
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+/*
+ * Estilos específicos para áreas de texto dentro del modal.
+ */
+.modal-content textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/*
+ * Estilos para los botones dentro del contenido del modal.
+ */
+.modal-content button {
+  padding: 12px 20px;
+  margin-right: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+}
+
+/*
+ * Efecto de elevación al pasar el mouse por encima de los botones del modal.
+ */
+.modal-content button:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+/*
+ * Estilos para el primer botón dentro del modal (ej. botón "Guardar cambios").
+ */
+.modal-content button:first-of-type {
+  background-color: #0076cd;
+  color: white;
+}
+
+/*
+ * Estilos para el primer botón del modal al pasar el mouse por encima.
+ */
+.modal-content button:first-of-type:hover {
+  background-color: #005fa3;
+}
+
+/*
+ * Estilos para el último botón dentro del modal (ej. botón "Cancelar").
+ */
+.modal-content button:last-child {
+  background-color: #6c757d;
+  color: white;
+}
+
+/*
+ * Estilos para el último botón del modal al pasar el mouse por encima.
+ */
+.modal-content button:last-child:hover {
+  background-color: #5a6268;
+}
+
+/* --- Diseño Responsivo --- */
+/*
+ * Media query para pantallas con un ancho máximo de 768px (dispositivos móviles).
+ */
+@media (max-width: 768px) {
+  /*
+   * Transforma la tabla para que sus elementos se muestren como bloques.
+   */
+  table, th, td {
+    display: block;
+  }
+
+  /*
+   * Oculta el encabezado de la tabla en pantallas pequeñas.
+   */
+  thead {
+    display: none;
+  }
+
+  /*
+   * Estilos para las filas del cuerpo de la tabla en pantallas pequeñas.
+   */
+  tbody tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /*
+   * Estilos para las celdas de datos de la tabla en pantallas pequeñas.
+   */
+  tbody td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  /*
+   * Crea etiquetas para las celdas de la tabla usando el atributo `data-label`.
+   */
+  tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    color: #0077cc;
+  }
+
+  /*
+   * Cambia la dirección de la navegación a columna en pantallas pequeñas.
+   */
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /*
+   * Ajusta el ancho y margen del contenido del modal en pantallas pequeñas.
+   */
+  .modal-content {
+    width: 95%;
+    margin: 20px auto;
+  }
+
+  /*
+   * Ajusta la altura de los gráficos en pantallas pequeñas.
+   */
+  canvas {
+    height: 300px;
+  }
+}

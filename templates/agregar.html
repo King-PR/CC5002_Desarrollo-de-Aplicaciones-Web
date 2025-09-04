@@ -1,0 +1,166 @@
+<!-- templates/agregar.html -->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agregar Actividad</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /*
+     * Estilos específicos para los mensajes flash en esta página.
+     * Estos estilos sobrescriben o complementan los del archivo 'style.css'.
+     */
+    .flashes {
+      background-color: #fffae6;
+      border: 1px solid #ffe58f;
+      padding: 10px;
+      margin: 15px auto;
+      max-width: 800px;
+      border-radius: 5px;
+      color: #8a6d00;
+      font-weight: bold;
+      list-style: none;
+    }
+    .flashes li {
+      margin: 0;
+    }
+    /*
+     * Clase para ocultar visualmente elementos, manteniéndolos accesibles para lectores de pantalla.
+     */
+    .visually-hidden {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    /* Agregar margen para separar el botón "Volver a la portada" */
+    #volver-portada {
+      margin-top: 20px;
+    }
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Informar Sobre Nueva Actividad</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('ver_actividades') }}">Ver Listado de Actividades</a></li>
+      <li><a href="{{ url_for('ver_estadisticas') }}">Estadísticas</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2 class="visually-hidden">Formulario para nueva actividad</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for msg in messages %}
+            <li>{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form id="form-actividad" method="post" enctype="multipart/form-data" action="{{ url_for('agregar_actividad') }}">
+      <fieldset>
+        <legend>¿Dónde?</legend>
+        <label>Región:
+          <select id="region" name="region" required>
+            <option value="">Seleccione una región</option>
+          </select>
+        </label><br>
+        <label>Comuna:
+          <select id="comuna" name="comuna" required>
+            <option value="">Seleccione una comuna</option>
+          </select>
+        </label><br>
+        <label>Sector:
+          <input type="text" id="sector" name="sector" maxlength="100" required>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>¿Quién organiza?</legend>
+        <label>Nombre:
+          <input type="text" id="nombre" name="nombre" maxlength="200" required>
+        </label><br>
+        <label>Email:
+          <input type="email" id="email" name="email" maxlength="100" required>
+        </label><br>
+        <label>Número celular:
+          <input type="tel" id="celular" name="celular" placeholder="+56987654321">
+        </label><br>
+      </fieldset>
+
+      <fieldset>
+        <legend>Contactar por (marca uno o más):</legend>
+        <div id="contactos-checkboxes">
+          <label><input type="checkbox" name="contacto" value="whatsapp"> WhatsApp</label><br>
+          <label><input type="checkbox" name="contacto" value="telegram"> Telegram</label><br>
+          <label><input type="checkbox" name="contacto" value="x"> X</label><br>
+          <label><input type="checkbox" name="contacto" value="instagram"> Instagram</label><br>
+          <label><input type="checkbox" name="contacto" value="tiktok"> TikTok</label><br>
+          <label><input type="checkbox" name="contacto" value="otra"> Otra</label><br>
+        </div>
+        <div id="id-contactos"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>¿Cuándo y de qué trata?</legend>
+        <label>Inicio:
+          <input type="datetime-local" id="inicio" name="inicio" required>
+        </label><br>
+        <label>Término:
+          <input type="datetime-local" id="termino" name="termino">
+        </label><br>
+        <label>Descripción:<br>
+          <textarea id="descripcion" name="descripcion" rows="10" cols="50"></textarea>
+        </label><br>
+      </fieldset>
+
+      <fieldset>
+        <legend>Tema(s) (marca uno o más):</legend>
+        <div id="temas-checkboxes">
+          <label><input type="checkbox" name="tema" value="musica"> Música</label><br>
+          <label><input type="checkbox" name="tema" value="deporte"> Deporte</label><br>
+          <label><input type="checkbox" name="tema" value="ciencias"> Ciencias</label><br>
+          <label><input type="checkbox" name="tema" value="religion"> Religión</label><br>
+          <label><input type="checkbox" name="tema" value="politica"> Política</label><br>
+          <label><input type="checkbox" name="tema" value="tecnologia"> Tecnología</label><br>
+          <label><input type="checkbox" name="tema" value="juegos"> Juegos</label><br>
+          <label><input type="checkbox" name="tema" value="baile"> Baile</label><br>
+          <label><input type="checkbox" name="tema" value="comida"> Comida</label><br>
+          <label><input type="checkbox" name="tema" value="otro"> Otro</label><br>
+        </div>
+        <div id="tema-otros"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Fotos:</legend>
+        <div id="fotos">
+          <input type="file" id="foto" name="foto">
+        </div>
+        <button type="button" id="agregar-foto">Agregar otra foto</button>
+      </fieldset>
+
+      <br>
+      <button type="submit">Agregar esta actividad</button>
+    </form>
+
+    <footer>
+      <button id="volver-portada" type="button" onclick="window.location.href='/'" class="btn-unificado">Volver a la portada</button>
+    </footer>
+  </main>
+
+  <script src="{{ url_for('static', filename='validaciones.js') }}"></script>
+</body>
+</html>
